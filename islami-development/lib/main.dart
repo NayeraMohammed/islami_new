@@ -1,44 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'homeScreen.dart';
+import 'package:islami/homeScreen.dart';
 
-import 'app_config.dart';
-import 'My_Theme_data.dart';
-import 'sura_details.dart';
-import 'tabs/ahadeth_details.dart';
+class HomeScreen extends StatelessWidget {
+  static const String routeName = "home";
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => AppConfig(),
-      child: MyApp(),
-    ),
-  );
-}
+  const HomeScreen({super.key});
 
-class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
+      ),
 
-    var appConfig = Provider.of<AppConfig>(context);
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-
-      ///  اللغة
-      locale: appConfig.locale,
-
-      ///  الثيم
-      theme: MyThemeData.lightTheme,
-      darkTheme: MyThemeData.darkTheme,
-      themeMode: appConfig.themeMode,
-
-      initialRoute: HomeScreen.routeName,
-      routes: {
-        HomeScreen.routeName: (context) => HomeScreen(),
-        SuraDetails.routeName: (context) => SuraDetails(),
-        AhadethDetails.routeName: (context) => AhadethDetails(),
-      },
+      body: SettingTab(), // 👈 هنا بنعرض صفحة الـ settings
     );
   }
 }

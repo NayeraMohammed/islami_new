@@ -1,90 +1,105 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../app_config.dart';
-import '../My_Theme_data.dart';
+import 'package:islami/My_Theme_data.dart';
+import 'package:islami/tabs/ahadeth.dart';
+import 'package:islami/tabs/quran.dart';
+import 'package:islami/tabs/radio.dart';
+import 'package:islami/tabs/sebha.dart';
+import 'package:islami/tabs/setting.dart';
 
-class SettingTab extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  static const String routeName = "home";
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int index = 0;
+
+  List<Widget> tabs = [
+    SettingTab(),
+    RadioTabs(),
+    SebhaTabs(),
+    AhadethTabs(),
+    QuranTabs(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    var appConfig = Provider.of<AppConfig>(context);
+    return Stack(
+      children: [
+        /// 🔥 الخلفية
+        Image.asset(
+          "assets/images/background.png",
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
 
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.transparent,
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Language",
-                style: Theme.of(context).textTheme.bodyLarge,
+        /// 🔥 التطبيق
+        Scaffold(
+          backgroundColor: Colors.transparent, // 👈 مهم جدًا
+
+          appBar: AppBar(
+            backgroundColor: Colors.transparent, // 👈 مهم
+            elevation: 0,
+            centerTitle: true,
+            title: Text(
+              "Islami",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
+          ),
+
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: index,
+            onTap: (value) {
+              setState(() {
+                index = value;
+              });
+            },
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: MyThemeData.primary,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.white,
+
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.settings),
+                label: "Setting",
               ),
-              SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: MyThemeData.primary,
-                  borderRadius: BorderRadius.circular(12),
+              BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage("assets/images/radio.png"),
                 ),
-                child: DropdownButton<String>(
-                  value: appConfig.locale.languageCode,
-                  isExpanded: true,
-                  underline: SizedBox(),
-                  dropdownColor: MyThemeData.primary,
-                  items: [
-                    DropdownMenuItem(
-                      value: 'en',
-                      child: Text("English"),
-                    ),
-                    DropdownMenuItem(
-                      value: 'ar',
-                      child: Text("العربية"),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    appConfig.changeLanguage(value!);
-                  },
-                ),
+                label: "Radio",
               ),
-              SizedBox(height: 30),
-              Text(
-                "Theme",
-                style: Theme.of(context).textTheme.bodyLarge,
+              BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage("assets/images/sebha.png"),
+                ),
+                label: "Sebha",
               ),
-              SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 12),
-                decoration: BoxDecoration(
-                  color: MyThemeData.primary,
-                  borderRadius: BorderRadius.circular(12),
+              BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage("assets/images/ahadeth.png"),
                 ),
-                child: DropdownButton<ThemeMode>(
-                  value: appConfig.themeMode,
-                  isExpanded: true,
-                  underline: SizedBox(),
-                  dropdownColor: MyThemeData.primary,
-                  items: [
-                    DropdownMenuItem(
-                      value: ThemeMode.light,
-                      child: Text("Light"),
-                    ),
-                    DropdownMenuItem(
-                      value: ThemeMode.dark,
-                      child: Text("Dark"),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    appConfig.changeTheme(value!);
-                  },
+                label: "Ahadeth",
+              ),
+              BottomNavigationBarItem(
+                icon: ImageIcon(
+                  AssetImage("assets/images/quran.png"),
                 ),
+                label: "Quran",
               ),
             ],
           ),
+
+          /// 🔥 المحتوى
+          body: SafeArea(
+            child: tabs[index],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
