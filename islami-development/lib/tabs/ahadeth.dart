@@ -31,7 +31,6 @@ class _AhadethTabsState extends State<AhadethTabs> {
           Image.asset("assets/images/ahadeth_image.png"),
           Divider(thickness: 2, color: MyThemeData.primary),
 
-          /// 👇 ترجمة الكلمة بس
           Text(
             appConfig.locale.languageCode == 'ar'
                 ? "الأحاديث"

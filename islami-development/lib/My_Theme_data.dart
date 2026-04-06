@@ -7,7 +7,6 @@ class MyThemeData {
   static const Color whiteColor = Color(0xFFFFFFFF);
   static const Color yellowColor = Color(0xFFFACC1D);
 
-  /// 🌞 Light Theme
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(
@@ -41,7 +40,6 @@ class MyThemeData {
     ),
   );
 
-  /// 🌙 Dark Theme (🔥 ده المهم)
   static ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.transparent,
     appBarTheme: AppBarTheme(

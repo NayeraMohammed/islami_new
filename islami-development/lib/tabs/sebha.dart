@@ -47,7 +47,6 @@ class _SebhaTabsState extends State<SebhaTabs> {
             child: Image.asset("assets/images/body_of_seb7a.png"),
           ),
 
-          /// 👇 هنا التعديل
           Text(
             appConfig.locale.languageCode == 'ar'
                 ? "عدد التسبيحات"

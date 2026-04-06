@@ -141,7 +141,6 @@ class QuranTabs extends StatelessWidget {
             color: MyThemeData.primary,
           ),
 
-          /// 👇 هنا الترجمة
           Text(
             appConfig.locale.languageCode == 'ar'
                 ? "اسم السورة"

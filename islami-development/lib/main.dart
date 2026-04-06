@@ -25,15 +25,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      /// 🌍 اللغة
+      ///  اللغة
       locale: appConfig.locale,
 
-      /// 🌗 الثيم
+      ///  الثيم
       theme: MyThemeData.lightTheme,
       darkTheme: MyThemeData.darkTheme,
       themeMode: appConfig.themeMode,
 
-      /// 🔀 الروتس (زي ما عندك)
       initialRoute: HomeScreen.routeName,
       routes: {
         HomeScreen.routeName: (context) => HomeScreen(),
